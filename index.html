@@ -1,28 +1,327 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ToDo App</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+<title>My Task Manager</title>
 <link rel="stylesheet" href="style.css">
+
 </head>
+
 <body>
 
-<div class="container">
-    <h1>📝 My ToDo List</h1>
 
-    <div class="input-group">
+<div class="container">
+
+    <!-- Header -->
+
+    <div class="header">
+
+        <div>
+            <h1>My Tasks</h1>
+            <p>Manage your tasks efficiently</p>
+        </div>
+
+        <div class="header-actions">
+
+            <button
+                id="exportBtn"
+                class="secondary-btn"
+            >
+                📤 Export
+            </button>
+
+            <label
+                for="importInput"
+                class="secondary-btn import-label"
+            >
+                📥 Import
+            </label>
+
+            <input
+                type="file"
+                id="importInput"
+                accept=".json"
+                hidden
+            >
+
+        </div>
+
+    </div>
+
+
+    <!-- Statistics -->
+
+    <div class="stats">
+
+        <div class="stat-card">
+            <span>Total</span>
+            <strong id="totalCount">0</strong>
+        </div>
+
+        <div class="stat-card">
+            <span>Active</span>
+            <strong id="activeCount">0</strong>
+        </div>
+
+        <div class="stat-card">
+            <span>Completed</span>
+            <strong id="completedCount">0</strong>
+        </div>
+
+        <div class="stat-card">
+            <span>Progress</span>
+            <strong id="progressPercent">0%</strong>
+        </div>
+
+    </div>
+
+
+    <!-- Add Task -->
+
+    <div class="add-task">
+
         <input
             type="text"
             id="taskInput"
-            placeholder="Add a new task..."
+            placeholder="What needs to be done?"
         >
-        <button id="addBtn">Add</button>
+
+        <select id="categoryInput">
+
+            <option value="Personal">
+                Personal
+            </option>
+
+            <option value="Work">
+                Work
+            </option>
+
+            <option value="Study">
+                Study
+            </option>
+
+            <option value="Shopping">
+                Shopping
+            </option>
+
+            <option value="Other">
+                Other
+            </option>
+
+        </select>
+
+
+        <select id="priorityInput">
+
+            <option value="low">
+                Low Priority
+            </option>
+
+            <option value="medium" selected>
+                Medium Priority
+            </option>
+
+            <option value="high">
+                High Priority
+            </option>
+
+        </select>
+
+
+        <button
+            id="addBtn"
+            class="add-btn"
+        >
+            + Add Task
+        </button>
+
     </div>
 
-    <ul id="taskList"></ul>
-</div>
 
+    <!-- Search and Filters -->
+
+    <div class="controls">
+
+        <div class="search-box">
+
+            🔍
+
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="Search tasks..."
+            >
+
+        </div>
+
+
+        <select id="filterInput">
+
+            <option value="all">
+                All Tasks
+            </option>
+
+            <option value="active">
+                Active
+            </option>
+
+            <option value="completed">
+                Completed
+            </option>
+
+        </select>
+
+
+        <select id="categoryFilter">
+
+            <option value="all">
+                All Categories
+            </option>
+
+            <option value="Personal">
+                Personal
+            </option>
+
+            <option value="Work">
+                Work
+            </option>
+
+            <option value="Study">
+                Study
+            </option>
+
+            <option value="Shopping">
+                Shopping
+            </option>
+
+            <option value="Other">
+                Other
+            </option>
+
+        </select>
+
+
+        <select id="priorityFilter">
+
+            <option value="all">
+                All Priorities
+            </option>
+
+            <option value="high">
+                High
+            </option>
+
+            <option value="medium">
+                Medium
+            </option>
+
+            <option value="low">
+                Low
+            </option>
+
+        </select>
+
+
+        <select id="sortInput">
+
+            <option value="newest">
+                Newest First
+            </option>
+
+            <option value="oldest">
+                Oldest First
+            </option>
+
+            <option value="priority">
+                Priority
+            </option>
+
+            <option value="alphabetical">
+                A → Z
+            </option>
+
+        </select>
+
+    </div>
+
+
+    <!-- Progress -->
+
+    <div class="progress-container">
+
+        <div class="progress-header">
+
+            <span>
+                Overall Progress
+            </span>
+
+            <span id="progressText">
+                0%
+            </span>
+
+        </div>
+
+
+        <div class="progress-bar">
+
+            <div id="progressFill"></div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Tasks -->
+
+    <ul id="taskList"></ul>
+
+
+    <!-- Empty Message -->
+
+    <div
+        id="emptyMessage"
+        class="empty-message"
+    >
+
+        <div>📋</div>
+
+        <h3>
+            No tasks found
+        </h3>
+
+        <p>
+            Add a task or change your filters.
+        </p>
+
+    </div>
+
+
+    <!-- Bottom Actions -->
+
+    <div class="bottom-actions">
+
+        <button
+            id="clearCompletedBtn"
+            class="clear-btn"
+        >
+            🗑️ Clear Completed
+        </button>
+
+
+        <button
+            id="clearAllBtn"
+            class="danger-btn"
+        >
+            Delete All
+        </button>
+
+    </div>
+
+</div>
 <script src="script.js"></script>
 </body>
 </html>
