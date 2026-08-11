@@ -1,10 +1,15 @@
 <!DOCTYPE html>
 
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
 
 <title>My Task Manager</title>
 <link rel="stylesheet" href="style.css">
@@ -16,30 +21,50 @@
 
 <div class="container">
 
-    <!-- Header -->
+
+    <!-- HEADER -->
 
     <div class="header">
 
         <div>
-            <h1>My Tasks</h1>
-            <p>Manage your tasks efficiently</p>
+
+            <h1>
+                My Tasks
+            </h1>
+
+            <p>
+                Manage your tasks efficiently
+            </p>
+
         </div>
+
 
         <div class="header-actions">
 
             <button
+                id="themeBtn"
+                class="header-btn"
+                title="Toggle dark mode"
+            >
+                🌙
+            </button>
+
+
+            <button
                 id="exportBtn"
-                class="secondary-btn"
+                class="header-btn"
             >
                 📤 Export
             </button>
 
+
             <label
                 for="importInput"
-                class="secondary-btn import-label"
+                class="header-btn import-label"
             >
                 📥 Import
             </label>
+
 
             <input
                 type="file"
@@ -53,34 +78,65 @@
     </div>
 
 
-    <!-- Statistics -->
+    <!-- STATISTICS -->
 
     <div class="stats">
 
         <div class="stat-card">
-            <span>Total</span>
-            <strong id="totalCount">0</strong>
+
+            <span>
+                Total
+            </span>
+
+            <strong id="totalCount">
+                0
+            </strong>
+
         </div>
 
-        <div class="stat-card">
-            <span>Active</span>
-            <strong id="activeCount">0</strong>
-        </div>
 
         <div class="stat-card">
-            <span>Completed</span>
-            <strong id="completedCount">0</strong>
+
+            <span>
+                Active
+            </span>
+
+            <strong id="activeCount">
+                0
+            </strong>
+
         </div>
 
+
         <div class="stat-card">
-            <span>Progress</span>
-            <strong id="progressPercent">0%</strong>
+
+            <span>
+                Completed
+            </span>
+
+            <strong id="completedCount">
+                0
+            </strong>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <span>
+                Progress
+            </span>
+
+            <strong id="progressPercent">
+                0%
+            </strong>
+
         </div>
 
     </div>
 
 
-    <!-- Add Task -->
+    <!-- ADD TASK -->
 
     <div class="add-task">
 
@@ -88,7 +144,9 @@
             type="text"
             id="taskInput"
             placeholder="What needs to be done?"
+            autocomplete="off"
         >
+
 
         <select id="categoryInput">
 
@@ -100,20 +158,12 @@
                 Work
             </option>
 
-            <option value="Health">
-                Health
-            </option>
-
             <option value="Study">
                 Study
             </option>
 
             <option value="Shopping">
                 Shopping
-            </option>
-
-            <option value="Health">
-                Health
             </option>
 
             <option value="Other">
@@ -126,15 +176,18 @@
         <select id="priorityInput">
 
             <option value="low">
-                Low Priority
+                🟢 Low
             </option>
 
-            <option value="medium" selected>
-                Medium Priority
+            <option
+                value="medium"
+                selected
+            >
+                🟡 Medium
             </option>
 
             <option value="high">
-                High Priority
+                🔴 High
             </option>
 
         </select>
@@ -150,7 +203,7 @@
     </div>
 
 
-    <!-- Search and Filters -->
+    <!-- SEARCH / FILTERS -->
 
     <div class="controls">
 
@@ -162,6 +215,7 @@
                 type="text"
                 id="searchInput"
                 placeholder="Search tasks..."
+                autocomplete="off"
             >
 
         </div>
@@ -198,10 +252,6 @@
                 Work
             </option>
 
-            <option value="Health">
-                Health
-            </option>
-
             <option value="Study">
                 Study
             </option>
@@ -224,15 +274,15 @@
             </option>
 
             <option value="high">
-                High
+                🔴 High
             </option>
 
             <option value="medium">
-                Medium
+                🟡 Medium
             </option>
 
             <option value="low">
-                Low
+                🟢 Low
             </option>
 
         </select>
@@ -241,11 +291,11 @@
         <select id="sortInput">
 
             <option value="newest">
-                Newest First
+                Newest
             </option>
 
             <option value="oldest">
-                Oldest First
+                Oldest
             </option>
 
             <option value="priority">
@@ -256,12 +306,16 @@
                 A → Z
             </option>
 
+            <option value="due">
+                Due Date
+            </option>
+
         </select>
 
     </div>
 
 
-    <!-- Progress -->
+    <!-- PROGRESS -->
 
     <div class="progress-container">
 
@@ -287,19 +341,21 @@
     </div>
 
 
-    <!-- Tasks -->
+    <!-- TASKS -->
 
     <ul id="taskList"></ul>
 
 
-    <!-- Empty Message -->
+    <!-- EMPTY -->
 
     <div
         id="emptyMessage"
         class="empty-message"
     >
 
-        <div>📋</div>
+        <div class="empty-icon">
+            📋
+        </div>
 
         <h3>
             No tasks found
@@ -312,13 +368,13 @@
     </div>
 
 
-    <!-- Bottom Actions -->
+    <!-- BOTTOM -->
 
     <div class="bottom-actions">
 
         <button
             id="clearCompletedBtn"
-            class="clear-btn"
+            class="bottom-btn clear-btn"
         >
             🗑️ Clear Completed
         </button>
@@ -326,7 +382,7 @@
 
         <button
             id="clearAllBtn"
-            class="danger-btn"
+            class="bottom-btn danger-btn"
         >
             Delete All
         </button>
@@ -334,6 +390,12 @@
     </div>
 
 </div>
+
+
+<!-- TOAST -->
+
+<div id="toastContainer"></div>
 <script src="script.js"></script>
 </body>
+
 </html>
