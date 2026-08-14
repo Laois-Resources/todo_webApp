@@ -12,8 +12,14 @@
 >
 
 <title>My Task Manager</title>
+
 <link rel="stylesheet" href="style.css">
-<link rel="icon" type="image/png" href="https://play-lh.googleusercontent.com/oE7aUpS05eX1YaHkfK-iFZ35xZ8ksuZDK31HGV857LkMIZqg-nIoAWO6SfnN40t3oFqr4BkLGyLNpo7KOGbsBw">
+
+<link
+    rel="icon"
+    type="image/png"
+    href="https://play-lh.googleusercontent.com/oE7aUpS05xE1YaHkfK-iFZ35xZ8ksuZDK31HGV857LkMIZqg-nIoAWO6SfnN40t3oFqr4BkLGyLNpo7KOGbsBw"
+>
 
 </head>
 
@@ -149,30 +155,46 @@
         >
 
 
+        <!-- CATEGORY -->
+
         <select id="categoryInput">
 
             <option value="Personal">
-                Personal
+                👤 Personal
             </option>
 
             <option value="Work">
-                Work
+                💼 Work
             </option>
 
             <option value="Study">
-                Study
+                📚 Study
             </option>
 
             <option value="Shopping">
-                Shopping
+                🛒 Shopping
+            </option>
+
+            <option value="Duties">
+                📝 Duties
+            </option>
+
+            <option value="Appointments">
+                📅 Appointments
+            </option>
+
+            <option value="Reminders">
+                🔔 Reminders
             </option>
 
             <option value="Other">
-                Other
+                📌 Other
             </option>
 
         </select>
 
+
+        <!-- PRIORITY -->
 
         <select id="priorityInput">
 
@@ -208,6 +230,8 @@
 
     <div class="controls">
 
+        <!-- SEARCH -->
+
         <div class="search-box">
 
             🔍
@@ -221,6 +245,8 @@
 
         </div>
 
+
+        <!-- STATUS FILTER -->
 
         <select id="filterInput">
 
@@ -239,6 +265,8 @@
         </select>
 
 
+        <!-- CATEGORY FILTER -->
+
         <select id="categoryFilter">
 
             <option value="all">
@@ -246,27 +274,41 @@
             </option>
 
             <option value="Personal">
-                Personal
+                👤 Personal
             </option>
 
             <option value="Work">
-                Work
+                💼 Work
             </option>
 
             <option value="Study">
-                Study
+                📚 Study
             </option>
 
             <option value="Shopping">
-                Shopping
+                🛒 Shopping
+            </option>
+
+            <option value="Duties">
+                📝 Duties
+            </option>
+
+            <option value="Appointments">
+                📅 Appointments
+            </option>
+
+            <option value="Reminders">
+                🔔 Reminders
             </option>
 
             <option value="Other">
-                Other
+                📌 Other
             </option>
 
         </select>
 
+
+        <!-- PRIORITY FILTER -->
 
         <select id="priorityFilter">
 
@@ -288,6 +330,8 @@
 
         </select>
 
+
+        <!-- SORT -->
 
         <select id="sortInput">
 
@@ -396,7 +440,10 @@
 <!-- TOAST -->
 
 <div id="toastContainer"></div>
+
+
 <script src="script.js"></script>
+
 </body>
 
 </html>
