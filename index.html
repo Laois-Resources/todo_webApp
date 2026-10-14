@@ -1,449 +1,152 @@
 <!DOCTYPE html>
-
 <html lang="en">
-
 <head>
-
-<meta charset="UTF-8">
-
-<meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
->
-
-<title>My Task Manager</title>
-
-<link rel="stylesheet" href="style.css">
-
-<link
-    rel="icon"
-    type="image/png"
-    href="https://i0.wp.com/thecontextofthings.com/wp-content/uploads/2016/06/task-list.jpg?fit=896%2C900&ssl=1"
->
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Task Manager</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="https://i0.wp.com/thecontextofthings.com/wp-content/uploads/2016/06/task-list.jpg?fit=896%2C900&ssl=1">
 </head>
-
 <body>
 
-
 <div class="container">
-
-
     <!-- HEADER -->
-
     <div class="header">
-
         <div>
-
-            <h1>
-                My Tasks
-            </h1>
-
-            <p>
-                Manage your tasks efficiently
-            </p>
-
+            <h1>My Tasks</h1>
+            <p>Streamlined professional productivity</p>
         </div>
-
-
         <div class="header-actions">
-
-            <button
-                id="themeBtn"
-                class="header-btn"
-                title="Toggle dark mode"
-            >
-                🌙
-            </button>
-
-
-            <button
-                id="exportBtn"
-                class="header-btn"
-            >
-                📤 Export
-            </button>
-
-
-            <label
-                for="importInput"
-                class="header-btn import-label"
-            >
-                📥 Import
-            </label>
-
-
-            <input
-                type="file"
-                id="importInput"
-                accept=".json"
-                hidden
-            >
-
+            <button id="themeBtn" class="header-btn" title="Toggle theme">🌙</button>
+            <button id="exportBtn" class="header-btn">📤 Export</button>
+            <label for="importInput" class="header-btn import-label">📥 Import</label>
+            <input type="file" id="importInput" accept=".json" hidden>
         </div>
-
     </div>
-
 
     <!-- STATISTICS -->
-
     <div class="stats">
-
         <div class="stat-card">
-
-            <span>
-                Total
-            </span>
-
-            <strong id="totalCount">
-                0
-            </strong>
-
+            <span>Total</span>
+            <strong id="totalCount">0</strong>
         </div>
-
-
         <div class="stat-card">
-
-            <span>
-                Active
-            </span>
-
-            <strong id="activeCount">
-                0
-            </strong>
-
+            <span>Active</span>
+            <strong id="activeCount">0</strong>
         </div>
-
-
         <div class="stat-card">
-
-            <span>
-                Completed
-            </span>
-
-            <strong id="completedCount">
-                0
-            </strong>
-
+            <span>Done</span>
+            <strong id="completedCount">0</strong>
         </div>
-
-
         <div class="stat-card">
-
-            <span>
-                Progress
-            </span>
-
-            <strong id="progressPercent">
-                0%
-            </strong>
-
+            <span>Progress</span>
+            <strong id="progressPercent">0%</strong>
         </div>
-
     </div>
-
 
     <!-- ADD TASK -->
-
     <div class="add-task">
-
-        <input
-            type="text"
-            id="taskInput"
-            placeholder="What needs to be done?"
-            autocomplete="off"
-        >
-
-
-        <!-- CATEGORY -->
-
+        <input type="text" id="taskInput" placeholder="What needs to be done?" autocomplete="off">
+        
         <select id="categoryInput">
-
-            <option value="Personal">
-                👤 Personal
-            </option>
-
-            <option value="Work">
-                💼 Work
-            </option>
-
-            <option value="Study">
-                📚 Study
-            </option>
-
-            <option value="Shopping">
-                🛒 Shopping
-            </option>
-
-            <option value="Duties">
-                📝 Duties
-            </option>
-
-            <option value="Appointments">
-                📅 Appointments
-            </option>
-
-            <option value="Reminders">
-                🔔 Reminders
-            </option>
-
-            <option value="Other">
-                📌 Other
-            </option>
-
+            <option value="Personal">👤 Personal</option>
+            <option value="Work" selected>💼 Work</option>
+            <option value="Study">📚 Study</option>
+            <option value="Shopping">🛒 Shopping</option>
+            <option value="Duties">📝 Duties</option>
+            <option value="Appointments">📅 Appointments</option>
+            <option value="Reminders">🔔 Reminders</option>
+            <option value="Other">📌 Other</option>
         </select>
-
-
-        <!-- PRIORITY -->
 
         <select id="priorityInput">
-
-            <option value="low">
-                🟢 Low
-            </option>
-
-            <option
-                value="medium"
-                selected
-            >
-                🟡 Medium
-            </option>
-
-            <option value="high">
-                🔴 High
-            </option>
-
+            <option value="low">🟢 Low</option>
+            <option value="medium" selected>🟡 Medium</option>
+            <option value="high">🔴 High</option>
         </select>
 
+        <input type="date" id="dueDateInput" title="Due Date">
 
-        <button
-            id="addBtn"
-            class="add-btn"
-        >
-            + Add Task
-        </button>
+        <select id="recurringInput" title="Recurring Option">
+            <option value="none">🔁 None</option>
+            <option value="daily">Daily</option>
+            <option value="weekly">Weekly</option>
+            <option value="monthly">Monthly</option>
+        </select>
 
+        <input type="text" id="effortInput" placeholder="Est. (e.g. 30m)" autocomplete="off">
+
+        <button id="addBtn" class="add-btn">+ Add Task</button>
     </div>
 
+    <!-- QUICK MOBILE FILTER PILLS -->
+    <div class="pill-filters">
+        <button class="pill-btn active" data-filter="all">All</button>
+        <button class="pill-btn" data-filter="active">Active</button>
+        <button class="pill-btn" data-filter="completed">Done</button>
+        <button class="pill-btn" data-filter="high">🔴 High</button>
+        <button class="pill-btn" data-filter="today">📅 Due Today</button>
+    </div>
 
-    <!-- SEARCH / FILTERS -->
-
+    <!-- SEARCH / ADVANCED CONTROLS -->
     <div class="controls">
-
-        <!-- SEARCH -->
-
         <div class="search-box">
-
-            🔍
-
-            <input
-                type="text"
-                id="searchInput"
-                placeholder="Search tasks..."
-                autocomplete="off"
-            >
-
+            <span>🔍</span>
+            <input type="text" id="searchInput" placeholder="Search tasks..." autocomplete="off">
         </div>
-
-
-        <!-- STATUS FILTER -->
-
-        <select id="filterInput">
-
-            <option value="all">
-                All Tasks
-            </option>
-
-            <option value="active">
-                Active
-            </option>
-
-            <option value="completed">
-                Completed
-            </option>
-
-        </select>
-
-
-        <!-- CATEGORY FILTER -->
 
         <select id="categoryFilter">
-
-            <option value="all">
-                All Categories
-            </option>
-
-            <option value="Personal">
-                👤 Personal
-            </option>
-
-            <option value="Work">
-                💼 Work
-            </option>
-
-            <option value="Study">
-                📚 Study
-            </option>
-
-            <option value="Shopping">
-                🛒 Shopping
-            </option>
-
-            <option value="Duties">
-                📝 Duties
-            </option>
-
-            <option value="Appointments">
-                📅 Appointments
-            </option>
-
-            <option value="Reminders">
-                🔔 Reminders
-            </option>
-
-            <option value="Other">
-                📌 Other
-            </option>
-
+            <option value="all">All Categories</option>
+            <option value="Personal">👤 Personal</option>
+            <option value="Work">💼 Work</option>
+            <option value="Study">📚 Study</option>
+            <option value="Shopping">🛒 Shopping</option>
+            <option value="Duties">📝 Duties</option>
+            <option value="Appointments">📅 Appointments</option>
+            <option value="Reminders">🔔 Reminders</option>
+            <option value="Other">📌 Other</option>
         </select>
-
-
-        <!-- PRIORITY FILTER -->
-
-        <select id="priorityFilter">
-
-            <option value="all">
-                All Priorities
-            </option>
-
-            <option value="high">
-                🔴 High
-            </option>
-
-            <option value="medium">
-                🟡 Medium
-            </option>
-
-            <option value="low">
-                🟢 Low
-            </option>
-
-        </select>
-
-
-        <!-- SORT -->
 
         <select id="sortInput">
-
-            <option value="newest">
-                Newest
-            </option>
-
-            <option value="oldest">
-                Oldest
-            </option>
-
-            <option value="priority">
-                Priority
-            </option>
-
-            <option value="alphabetical">
-                A → Z
-            </option>
-
-            <option value="due">
-                Due Date
-            </option>
-
+            <option value="newest">Newest First</option>
+            <option value="oldest">Oldest First</option>
+            <option value="priority">Priority</option>
+            <option value="alphabetical">A → Z</option>
+            <option value="due">Due Date</option>
         </select>
-
     </div>
-
 
     <!-- PROGRESS -->
-
     <div class="progress-container">
-
         <div class="progress-header">
-
-            <span>
-                Overall Progress
-            </span>
-
-            <span id="progressText">
-                0%
-            </span>
-
+            <span>Overall Completion Progress</span>
+            <span id="progressText">0%</span>
         </div>
-
-
         <div class="progress-bar">
-
             <div id="progressFill"></div>
-
         </div>
-
     </div>
 
-
-    <!-- TASKS -->
-
+    <!-- TASKS LIST -->
     <ul id="taskList"></ul>
 
-
     <!-- EMPTY -->
-
-    <div
-        id="emptyMessage"
-        class="empty-message"
-    >
-
-        <div class="empty-icon">
-            📋
-        </div>
-
-        <h3>
-            No tasks found
-        </h3>
-
-        <p>
-            Add a task or change your filters.
-        </p>
-
+    <div id="emptyMessage" class="empty-message">
+        <div class="empty-icon">📋</div>
+        <h3>No tasks found</h3>
+        <p>Add a new task above or clear your active filters.</p>
     </div>
-
 
     <!-- BOTTOM -->
-
     <div class="bottom-actions">
-
-        <button
-            id="clearCompletedBtn"
-            class="bottom-btn clear-btn"
-        >
-            🗑️ Clear Completed
-        </button>
-
-
-        <button
-            id="clearAllBtn"
-            class="bottom-btn danger-btn"
-        >
-            Delete All
-        </button>
-
+        <button id="clearCompletedBtn" class="bottom-btn clear-btn">🗑️ Clear Completed</button>
+        <button id="clearAllBtn" class="bottom-btn danger-btn">Delete All Tasks</button>
     </div>
-
 </div>
 
-
 <!-- TOAST -->
-
 <div id="toastContainer"></div>
 
-
 <script src="script.js"></script>
-
 </body>
-
 </html>
