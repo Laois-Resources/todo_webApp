@@ -124,11 +124,17 @@ body {
     font-size: 20px;
 }
 
+/* ADD TASK - 2 Row Grid for PC View */
 .add-task {
     display: grid;
-    grid-template-columns: 2fr 1fr 1fr 1fr 1fr 1fr auto;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
     gap: 8px;
     margin-bottom: 16px;
+}
+
+/* Make specific inputs span rows neatly */
+#taskInput {
+    grid-column: 1 / -1;
 }
 
 input, select, textarea {
@@ -150,6 +156,29 @@ input, select, textarea {
     border-color: var(--primary);
 }
 
+.notify-toggle-group {
+    display: flex;
+    align-items: center;
+    font-size: 13px;
+    padding: 0 4px;
+}
+
+.notify-label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--muted);
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.notify-label input {
+    cursor: pointer;
+    accent-color: var(--primary);
+    width: 16px;
+    height: 16px;
+}
+
 .add-btn {
     border: none;
     background: var(--primary);
@@ -160,6 +189,7 @@ input, select, textarea {
     font-weight: 600;
     font-size: 13px;
     white-space: nowrap;
+    grid-column: span 1;
 }
 
 .add-btn:hover { background: var(--primary-hover); }
@@ -388,6 +418,7 @@ input, select, textarea {
 .due-date.overdue-date { background: #fee2e2; color: #b91c1c; }
 .recurring-badge { background: #fae8ff; color: #86198f; }
 .effort-badge { background: #fef9c3; color: #854d0e; }
+.notify-badge { background: #e0f2fe; color: #0369a1; }
 
 .task-actions {
     display: flex;
@@ -559,7 +590,10 @@ input, select, textarea {
     .add-task {
         grid-template-columns: 1fr 1fr;
     }
-    .add-task input:first-child {
+    #taskInput {
+        grid-column: 1 / -1;
+    }
+    .add-btn {
         grid-column: 1 / -1;
     }
     .controls {
@@ -579,7 +613,9 @@ input, select, textarea {
     .stats { grid-template-columns: repeat(2, 1fr); gap: 6px; }
     .stat-card { padding: 10px; }
     .add-task { grid-template-columns: 1fr; }
-    .controls { grid-template-columns: 1fr; }
+    #taskInput { grid-column: auto; }
+    .add-btn { grid-column: auto; }
+    .controls { display: none; }
     .bottom-actions { flex-direction: column; }
     .bottom-btn { width: 100%; }
 }

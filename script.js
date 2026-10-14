@@ -28,6 +28,7 @@ const translations = {
         recWeekly: "Weekly",
         recMonthly: "Monthly",
         effortPlaceholder: "Est. (e.g. 30m)",
+        notifyMe: "🔔 Notify 1d before",
         addBtn: "+ Add Task",
         pillAll: "All",
         pillActive: "Active",
@@ -96,6 +97,7 @@ const translations = {
         recWeekly: "أسبوعي",
         recMonthly: "شهري",
         effortPlaceholder: "الوقت (مثل 30د)",
+        notifyMe: "🔔 تنبيه قبل يوم",
         addBtn: "+ إضافة مهمة",
         pillAll: "الكل",
         pillActive: "النشطة",
@@ -148,6 +150,7 @@ const priorityInput = document.getElementById("priorityInput");
 const dueDateInput = document.getElementById("dueDateInput");
 const recurringInput = document.getElementById("recurringInput");
 const effortInput = document.getElementById("effortInput");
+const notifyInput = document.getElementById("notifyInput");
 const addBtn = document.getElementById("addBtn");
 const searchInput = document.getElementById("searchInput");
 const categoryFilter = document.getElementById("categoryFilter");
@@ -182,6 +185,7 @@ tasks = tasks.map((task, index) => ({
     dueDate: task.dueDate || "",
     recurring: ["none", "daily", "weekly", "monthly"].includes(task.recurring) ? task.recurring : "none",
     effort: task.effort || "",
+    notify: Boolean(task.notify),
     subtasks: Array.isArray(task.subtasks) ? task.subtasks : [],
     createdAt: task.createdAt || Date.now()
 }));
@@ -252,6 +256,10 @@ function addTask() {
         return;
     }
 
+    if (notifyInput.checked && "Notification" in window && Notification.permission !== "granted") {
+        Notification.requestPermission();
+    }
+
     tasks.push({
         id: Date.now(),
         text: text,
@@ -262,6 +270,7 @@ function addTask() {
         dueDate: dueDateInput.value,
         recurring: recurringInput.value,
         effort: effortInput.value.trim(),
+        notify: notifyInput.checked,
         subtasks: [],
         createdAt: Date.now()
     });
@@ -271,9 +280,35 @@ function addTask() {
     effortInput.value = "";
     dueDateInput.value = "";
     recurringInput.value = "none";
+    notifyInput.checked = false;
     renderTasks();
     taskInput.focus();
     showToast("toastAdded");
+}
+
+function checkTaskNotifications() {
+    if (!("Notification" in window) || Notification.permission !== "granted") return;
+    
+    // Prevent midnight notifications by only triggering from 8 AM onwards
+    const currentHour = new Date().getHours();
+    if (currentHour < 8) return; 
+
+    const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    const tomorrowStr = tomorrow.toISOString().split("T")[0];
+
+    tasks.forEach(task => {
+        if (!task.completed && task.notify && task.dueDate === tomorrowStr) {
+            const notifiedKey = `notified_${task.id}_${tomorrowStr}`;
+            if (!localStorage.getItem(notifiedKey)) {
+                new Notification("Task Reminder", {
+                    body: `Reminder: "${task.text}" is due tomorrow!`,
+                    icon: "https://i0.wp.com/thecontextofthings.com/wp-content/uploads/2016/06/task-list.jpg?fit=896%2C900&ssl=1"
+                });
+                localStorage.setItem(notifiedKey, "true");
+            }
+        }
+    });
 }
 
 function handleRecurringTask(task) {
@@ -347,6 +382,7 @@ function renderTasks() {
     emptyMessage.style.display = filtered.length ? "none" : "block";
     renderList(filtered);
     updateStatistics();
+    checkTaskNotifications();
 }
 
 function renderList(filtered) {
@@ -380,6 +416,7 @@ function renderList(filtered) {
                         ${task.dueDate ? `<span class="badge due-date ${isOverdue(task) ? "overdue-date" : ""}">${isOverdue(task) ? t("overdueLabel") : "📅"} ${formatDate(task.dueDate)}</span>` : ""}
                         ${task.effort ? `<span class="badge effort-badge">⏱️ ${escapeHTML(task.effort)}</span>` : ""}
                         ${task.recurring !== "none" ? `<span class="badge recurring-badge">🔁 ${task.recurring}</span>` : ""}
+                        ${task.notify ? `<span class="badge notify-badge" title="1-day prior notification enabled">🔔 Notify</span>` : ""}
                     </div>
                 </div>
             </div>
@@ -445,6 +482,12 @@ function startEditing(id) {
                     <option value="monthly" ${task.recurring === "monthly" ? "selected" : ""}>Monthly</option>
                 </select>
             </div>
+            
+            <div style="margin-top: 6px;">
+                <label style="font-size: 12px; display: inline-flex; align-items: center; gap: 6px; cursor: pointer;">
+                    <input type="checkbox" class="edit-notify" ${task.notify ? "checked" : ""}> ${t("notifyMe")}
+                </label>
+            </div>
 
             <div class="edit-actions">
                 <button class="cancel-edit-btn">${t("cancel")}</button>
@@ -490,6 +533,11 @@ function saveEdit(id, li) {
     task.dueDate = li.querySelector(".edit-due-date").value;
     task.recurring = li.querySelector(".edit-recurring").value;
     task.effort = li.querySelector(".edit-effort").value.trim();
+    task.notify = li.querySelector(".edit-notify").checked;
+
+    if (task.notify && "Notification" in window && Notification.permission !== "granted") {
+        Notification.requestPermission();
+    }
 
     const subInputs = li.querySelectorAll(".edit-sub-input");
     subInputs.forEach(inp => {
@@ -630,6 +678,7 @@ importInput.addEventListener("change", event => {
                 dueDate: task.dueDate || "",
                 recurring: ["none", "daily", "weekly", "monthly"].includes(task.recurring) ? task.recurring : "none",
                 effort: task.effort || "",
+                notify: Boolean(task.notify),
                 subtasks: Array.isArray(task.subtasks) ? task.subtasks : [],
                 createdAt: task.createdAt || Date.now()
             })).filter(task => task.text);
