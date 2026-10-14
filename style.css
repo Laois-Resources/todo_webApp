@@ -281,6 +281,16 @@ input, select, textarea {
     border-radius: 10px;
 }
 
+[dir="rtl"] .task {
+    border-left: 1px solid var(--border);
+    border-right: 5px solid var(--primary);
+}
+
+[dir="rtl"] .task.high-priority { border-right-color: #ef4444; }
+[dir="rtl"] .task.medium-priority { border-right-color: #f59e0b; }
+[dir="rtl"] .task.low-priority { border-right-color: #22c55e; }
+[dir="rtl"] .task.overdue { border-right-color: #dc2626; }
+
 .task.high-priority { border-left-color: #ef4444; }
 .task.medium-priority { border-left-color: #f59e0b; }
 .task.low-priority { border-left-color: #22c55e; }
@@ -336,6 +346,13 @@ input, select, textarea {
     display: flex;
     flex-direction: column;
     gap: 3px;
+}
+
+[dir="rtl"] .subtasks-container {
+    padding-left: 0;
+    padding-right: 10px;
+    border-left: none;
+    border-right: 2px solid var(--border);
 }
 
 .subtask-item {
@@ -443,6 +460,10 @@ input, select, textarea {
     justify-content: flex-end;
 }
 
+[dir="rtl"] .edit-actions {
+    justify-content: flex-start;
+}
+
 .save-edit-btn, .cancel-edit-btn {
     border: none;
     padding: 7px 12px;
@@ -498,6 +519,11 @@ input, select, textarea {
     margin-left: auto;
 }
 
+[dir="rtl"] #toastContainer {
+    margin-left: 0;
+    margin-right: auto;
+}
+
 .toast {
     width: 100%;
     padding: 11px 14px;
@@ -513,7 +539,9 @@ input, select, textarea {
 }
 
 .toast.success { border-left: 4px solid #22c55e; }
+[dir="rtl"] .toast.success { border-left: none; border-right: 4px solid #22c55e; }
 .toast.error { border-left: 4px solid #ef4444; }
+[dir="rtl"] .toast.error { border-left: none; border-right: 4px solid #ef4444; }
 
 .toast-undo-btn {
     background: rgba(255, 255, 255, 0.2);

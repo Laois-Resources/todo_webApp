@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,13 +13,14 @@
     <!-- HEADER -->
     <div class="header">
         <div>
-            <h1>My Tasks</h1>
-            <p>Streamlined professional productivity</p>
+            <h1 data-i18n="appTitle">My Tasks</h1>
+            <p data-i18n="appSubtitle">Streamlined professional productivity</p>
         </div>
         <div class="header-actions">
+            <button id="langBtn" class="header-btn" title="Toggle Language">🌐 العربية</button>
             <button id="themeBtn" class="header-btn" title="Toggle theme">🌙</button>
-            <button id="exportBtn" class="header-btn">📤 Export</button>
-            <label for="importInput" class="header-btn import-label">📥 Import</label>
+            <button id="exportBtn" class="header-btn" data-i18n="exportBtn">📤 Export</button>
+            <label for="importInput" class="header-btn import-label" data-i18n="importBtn">📥 Import</label>
             <input type="file" id="importInput" accept=".json" hidden>
         </div>
     </div>
@@ -27,99 +28,99 @@
     <!-- STATISTICS -->
     <div class="stats">
         <div class="stat-card">
-            <span>Total</span>
+            <span data-i18n="statTotal">Total</span>
             <strong id="totalCount">0</strong>
         </div>
         <div class="stat-card">
-            <span>Active</span>
+            <span data-i18n="statActive">Active</span>
             <strong id="activeCount">0</strong>
         </div>
         <div class="stat-card">
-            <span>Done</span>
+            <span data-i18n="statDone">Done</span>
             <strong id="completedCount">0</strong>
         </div>
         <div class="stat-card">
-            <span>Progress</span>
+            <span data-i18n="statProgress">Progress</span>
             <strong id="progressPercent">0%</strong>
         </div>
     </div>
 
     <!-- ADD TASK -->
     <div class="add-task">
-        <input type="text" id="taskInput" placeholder="What needs to be done?" autocomplete="off">
+        <input type="text" id="taskInput" data-i18n-placeholder="taskInputPlaceholder" placeholder="What needs to be done?" autocomplete="off">
         
         <select id="categoryInput">
-            <option value="Personal">👤 Personal</option>
-            <option value="Work" selected>💼 Work</option>
-            <option value="Study">📚 Study</option>
-            <option value="Shopping">🛒 Shopping</option>
-            <option value="Duties">📝 Duties</option>
-            <option value="Appointments">📅 Appointments</option>
-            <option value="Reminders">🔔 Reminders</option>
-            <option value="Other">📌 Other</option>
+            <option value="Personal" data-i18n="catPersonal">👤 Personal</option>
+            <option value="Work" selected data-i18n="catWork">💼 Work</option>
+            <option value="Study" data-i18n="catStudy">📚 Study</option>
+            <option value="Shopping" data-i18n="catShopping">🛒 Shopping</option>
+            <option value="Duties" data-i18n="catDuties">📝 Duties</option>
+            <option value="Appointments" data-i18n="catAppointments">📅 Appointments</option>
+            <option value="Reminders" data-i18n="catReminders">🔔 Reminders</option>
+            <option value="Other" data-i18n="catOther">📌 Other</option>
         </select>
 
         <select id="priorityInput">
-            <option value="low">🟢 Low</option>
-            <option value="medium" selected>🟡 Medium</option>
-            <option value="high">🔴 High</option>
+            <option value="low" data-i18n="prioLow">🟢 Low</option>
+            <option value="medium" selected data-i18n="prioMed">🟡 Medium</option>
+            <option value="high" data-i18n="prioHigh">🔴 High</option>
         </select>
 
         <input type="date" id="dueDateInput" title="Due Date">
 
         <select id="recurringInput" title="Recurring Option">
-            <option value="none">🔁 None</option>
-            <option value="daily">Daily</option>
-            <option value="weekly">Weekly</option>
-            <option value="monthly">Monthly</option>
+            <option value="none" data-i18n="recNone">🔁 None</option>
+            <option value="daily" data-i18n="recDaily">Daily</option>
+            <option value="weekly" data-i18n="recWeekly">Weekly</option>
+            <option value="monthly" data-i18n="recMonthly">Monthly</option>
         </select>
 
-        <input type="text" id="effortInput" placeholder="Est. (e.g. 30m)" autocomplete="off">
+        <input type="text" id="effortInput" data-i18n-placeholder="effortPlaceholder" placeholder="Est. (e.g. 30m)" autocomplete="off">
 
-        <button id="addBtn" class="add-btn">+ Add Task</button>
+        <button id="addBtn" class="add-btn" data-i18n="addBtn">+ Add Task</button>
     </div>
 
     <!-- QUICK MOBILE FILTER PILLS -->
     <div class="pill-filters">
-        <button class="pill-btn active" data-filter="all">All</button>
-        <button class="pill-btn" data-filter="active">Active</button>
-        <button class="pill-btn" data-filter="completed">Done</button>
-        <button class="pill-btn" data-filter="high">🔴 High</button>
-        <button class="pill-btn" data-filter="today">📅 Due Today</button>
+        <button class="pill-btn active" data-filter="all" data-i18n="pillAll">All</button>
+        <button class="pill-btn" data-filter="active" data-i18n="pillActive">Active</button>
+        <button class="pill-btn" data-filter="completed" data-i18n="pillDone">Done</button>
+        <button class="pill-btn" data-filter="high" data-i18n="pillHigh">🔴 High</button>
+        <button class="pill-btn" data-filter="today" data-i18n="pillToday">📅 Due Today</button>
     </div>
 
     <!-- SEARCH / ADVANCED CONTROLS -->
     <div class="controls">
         <div class="search-box">
             <span>🔍</span>
-            <input type="text" id="searchInput" placeholder="Search tasks..." autocomplete="off">
+            <input type="text" id="searchInput" data-i18n-placeholder="searchPlaceholder" placeholder="Search tasks..." autocomplete="off">
         </div>
 
         <select id="categoryFilter">
-            <option value="all">All Categories</option>
-            <option value="Personal">👤 Personal</option>
-            <option value="Work">💼 Work</option>
-            <option value="Study">📚 Study</option>
-            <option value="Shopping">🛒 Shopping</option>
-            <option value="Duties">📝 Duties</option>
-            <option value="Appointments">📅 Appointments</option>
-            <option value="Reminders">🔔 Reminders</option>
-            <option value="Other">📌 Other</option>
+            <option value="all" data-i18n="catFilterAll">All Categories</option>
+            <option value="Personal" data-i18n="catPersonal">👤 Personal</option>
+            <option value="Work" data-i18n="catWork">💼 Work</option>
+            <option value="Study" data-i18n="catStudy">📚 Study</option>
+            <option value="Shopping" data-i18n="catShopping">🛒 Shopping</option>
+            <option value="Duties" data-i18n="catDuties">📝 Duties</option>
+            <option value="Appointments" data-i18n="catAppointments">📅 Appointments</option>
+            <option value="Reminders" data-i18n="catReminders">🔔 Reminders</option>
+            <option value="Other" data-i18n="catOther">📌 Other</option>
         </select>
 
         <select id="sortInput">
-            <option value="newest">Newest First</option>
-            <option value="oldest">Oldest First</option>
-            <option value="priority">Priority</option>
-            <option value="alphabetical">A → Z</option>
-            <option value="due">Due Date</option>
+            <option value="newest" data-i18n="sortNewest">Newest First</option>
+            <option value="oldest" data-i18n="sortOldest">Oldest First</option>
+            <option value="priority" data-i18n="sortPriority">Priority</option>
+            <option value="alphabetical" data-i18n="sortAlpha">A → Z</option>
+            <option value="due" data-i18n="sortDue">Due Date</option>
         </select>
     </div>
 
     <!-- PROGRESS -->
     <div class="progress-container">
         <div class="progress-header">
-            <span>Overall Completion Progress</span>
+            <span data-i18n="progressHeader">Overall Completion Progress</span>
             <span id="progressText">0%</span>
         </div>
         <div class="progress-bar">
@@ -133,14 +134,14 @@
     <!-- EMPTY -->
     <div id="emptyMessage" class="empty-message">
         <div class="empty-icon">📋</div>
-        <h3>No tasks found</h3>
-        <p>Add a new task above or clear your active filters.</p>
+        <h3 data-i18n="emptyTitle">No tasks found</h3>
+        <p data-i18n="emptySub">Add a new task above or clear your active filters.</p>
     </div>
 
     <!-- BOTTOM -->
     <div class="bottom-actions">
-        <button id="clearCompletedBtn" class="bottom-btn clear-btn">🗑️ Clear Completed</button>
-        <button id="clearAllBtn" class="bottom-btn danger-btn">Delete All Tasks</button>
+        <button id="clearCompletedBtn" class="bottom-btn clear-btn" data-i18n="clearDone">🗑️ Clear Completed</button>
+        <button id="clearAllBtn" class="bottom-btn danger-btn" data-i18n="clearAll">Delete All Tasks</button>
     </div>
 </div>
 
